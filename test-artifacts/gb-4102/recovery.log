@@ -1,0 +1,10 @@
+adopt-on-crash & duplicate queue item ok
+external same-name conflict kept field: 同名索引 idx_live_wl_ext1 已存在但列定义不同，已拒绝且未改动现场
+conflict retry still leaves field intact
+race pubC completed None
+race rbB conflict 只有当前生效的方案才能回退
+concurrent publish/rollback no overwrite ok
+parallel publish1 completed None
+parallel publish2 conflict 生效方案已被其他发布或回退改变，本次发布未覆盖现场，请重新创建方案
+concurrent publish isolated; loser index not created: ['PRIMARY', 'idx_live_wl_ext1', 'idx_live_wl_par1', 'idx_live_wl_racec', 'idx_live_wl_rec1']
+ALL RECOVERY/RACE TESTS PASSED

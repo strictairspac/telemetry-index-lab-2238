@@ -5,6 +5,7 @@ from src.models.workload import Workload
 from src.models.candidate import Candidate
 from src.models.experiment import Experiment
 from src.models.telemetry import Telemetry
+from src.models.index_plan import IndexPlan,IndexOperation
 from src.utils.security import hash_password
 def seed():
  Base.metadata.create_all(engine)
@@ -23,6 +24,6 @@ def seed():
   data=[{'id':i+1,'sensor_id':i%100+1,'recorded_at':(base+timedelta(minutes=i*8)).isoformat(),'device_type':['pump','motor','valve'][i%3],'value':round(30+(i*17%900)/10,2)} for i in range(5000) if i+1 not in existing]
   if data:s.bulk_insert_mappings(Telemetry,data)
   s.commit()
-  counts={m.__tablename__:s.query(m).count() for m in (User,Workload,Candidate,Telemetry,Experiment)}
+  counts={m.__tablename__:s.query(m).count() for m in (User,Workload,Candidate,Telemetry,Experiment,IndexPlan,IndexOperation)}
   print(counts);return counts
 if __name__=='__main__':seed()

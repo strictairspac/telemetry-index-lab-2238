@@ -1,0 +1,12 @@
+experiment1 resident baseline {'note': '基线保留常驻与外建索引，仅候选索引为本次新增变量', 'kept_indexes': ['PRIMARY'], 'external_indexes': [], 'resident_indexes': []}
+plan1 1 idx_live_wl_pub1 pending
+candidate change isolated: ok
+publish op 1 completed None
+publish verified entity ok {'exists': True, 'columns': ['sensor_id', 'recorded_at'], 'matches': True, 'classified': 'resident'}
+same name different def 409 {'detail': '同名索引 idx_live_wl_pub1 已被方案 #1 用于不同列定义，现场未改动'}
+publish supersede ok ['PRIMARY', 'idx_live_wl_pub2']
+rollback restores previous ok ['PRIMARY', 'idx_live_wl_pub1']
+exp3 baseline {'note': '基线保留常驻与外建索引，仅候选索引为本次新增变量', 'kept_indexes': ['PRIMARY', 'idx_live_wl_pub1'], 'external_indexes': [], 'resident_indexes': ['idx_live_wl_pub1']}
+subsequent trial preserves resident index: ok
+external index preserved on trial: ok
+ALL PUBLISH TESTS PASSED

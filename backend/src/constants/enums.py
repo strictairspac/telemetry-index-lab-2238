@@ -1,3 +1,9 @@
 ROLES=('admin','operator','viewer')
 STATUSES=('queued','running','completed','failed')
 COLUMNS=('sensor_id','recorded_at','device_type','value')
+PLAN_STATUSES=('pending','active','superseded','rolled_back','conflict','failed')
+OPERATION_STATUSES=('pending','running','completed','conflict','failed')
+INDEX_LOCK='index_trial_serial'
+REQUEST_LOCK='index_publish_request'
+RESIDENT_PREFIX='idx_live_wl'
+TRIAL_PREFIX='trial_ev_'

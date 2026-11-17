@@ -29,3 +29,6 @@ class CandidateInput(BaseModel):
 class ExperimentInput(BaseModel):
  name:str=Field(min_length=2,max_length=120)
  candidate_id:int
+class PlanInput(BaseModel):
+ experiment_id:int
+ index_name:str|None=Field(default=None,max_length=64)

@@ -26,3 +26,9 @@ def create(data):
   with Session() as s:r=s.get(Experiment,result['id']);r.status='failed';r.error='队列不可用，请创建新试验';s.commit()
   raise HTTPException(503,'队列不可用，请稍后重新执行')
  return result
+def recover_pending():
+ """启动时接回 queued/running 的试验；执行按 experiment_id 的临时索引名幂等接续。"""
+ with Session() as s:ids=[r.id for r in s.query(Experiment).filter(Experiment.status.in_(('queued','running'))).order_by(Experiment.id.asc()).all()]
+ if ids:
+  for i in ids:queue.rpush('index-trials',i)
+ return ids
